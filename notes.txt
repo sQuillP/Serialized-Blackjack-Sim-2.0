@@ -1,0 +1,48 @@
+
+#### Player ###
+
+- represented as a 2d matrix
+- has stats
+- has a hand of cards(up to 4 hands because of splitting)
+
+
+### Game ###
+
+
+
+
+
+###blackjack rules###
+
+- cardcount higher than 21 is a bust
+
+- everyone is dealt 2 cards face up, dealer gets a face down card.
+
+- face cards are equal to 10, ace can be either 1 or 11
+
+- if your card total is 21, then you win 1.5x your bet from the dealer.
+
+- if your card total is greater than 21, then you lost (bust)
+
+- if you stand, your turn is over
+
+
+- dealer will always go last.
+- if the dealer wins, everybody except those who have 21 from their first 2 cards will lose, otherwise it is a tie.
+- if the dealer card total is 17 or higher they must stand.
+- if the dealer gets a 16 or lower, they must take another card when it is their turn.
+
+- soft hand means you have an ace, hard means you don't have an ace.
+
+#### A player wins if:
+
+- their final card score is higher than the dealer's.
+- the dealer busts.
+
+
+#### A player will lose if:
+
+- dealer card total is greater than or equal to their card total
+- card total is greater than 21
+
+

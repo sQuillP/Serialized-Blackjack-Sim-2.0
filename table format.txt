@@ -1,0 +1,19 @@
+### First table rows (hard hand):
+
+- range from 5-21
+
+### Second set of table rows (soft hand):
+
+- range from (ace-2, ace-10) (9 entries)
+
+## Third set of table rows (doubles)
+
+- range from (2-2,A-A)
+
+
+## altogether there are 17+9+10 = 36 rows and 9 columns
+
+h = hit
+s = stand
+dd = double-down
+sp = split
