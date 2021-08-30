@@ -2,13 +2,14 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include <time.h>
 #include "Player.h"
 #include "Game.h"
 
 /*
 TODO: 
-- Program needs to be more robust on user input.
-- Maintain cleanliness on the main
+
+- Main needs to be refactored/broken up into funcitons.
 
 */
 
@@ -19,8 +20,12 @@ int main()
     char* stringBuf = NULL;
     char** files = (char**) malloc(sizeof(char*));
     int fileCount = 0;
+    int simulations = 0;
     FILE* fp = NULL;
     Player** players;
+    GameResources resources;
+
+    srand(time(NULL));
 
     printf("###Welcome to blackjack 2.0###\n\n");
     printf("Please Enter the file paths for each player file separated by a whitespace...\n");
@@ -45,12 +50,24 @@ int main()
         printf("Invalid input, exiting program...");
         exit(1);
     }
-    players = (Player**)malloc(sizeof(Player*)*fileCount);
 
+    printf("How many simulations would you like to run?\n");
+    printf("Backjack 2.0>");
+    fgets(buf,sizeof(buf),stdin);
+    simulations = atoi(buf);
+
+    if(simulations == 0)
+    {
+        printf("Please enter a positive, nonzero integer.\n");
+        exit(1);
+    }
+
+    resources.players = (Player**)malloc(sizeof(Player*)*fileCount);
+    initializeDeck(&resources.deck);
 
     for(int i = 0; i<fileCount; i++)
     {
-        players[i] = (Player*)malloc(sizeof(Player));
+        resources.players[i] = (Player*)malloc(sizeof(Player));
         fp = fopen(files[i],"r");
         printf("%s\n\n",files[i]);
         if(fp == NULL)
@@ -58,15 +75,15 @@ int main()
             printf("Unable to open %s, exiting the program.\n",files[i]);
             exit(1);
         }
-        loadPlayerTable(players[i]->hardTable , fp, 17);
-        loadPlayerTable(players[i]->softTable, fp, 9);
-        loadPlayerTable(players[i]->doublesTable, fp, 10);
-
+        loadPlayerTable(resources.players[i]->hardTable , fp, 17);
+        loadPlayerTable(resources.players[i]->softTable, fp, 9);
+        loadPlayerTable(resources.players[i]->doublesTable, fp, 10);
+        fclose(fp);
     }
 
+    // begin the game simulation
 
-    // printf("%d \t %d\t%d\n",players[0]->hardTable[8][3],players[0]->softTable[5][6], players[0]->doublesTable[2][3]);
-
+   
 
     return 0;
 }
